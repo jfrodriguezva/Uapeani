@@ -93,7 +93,26 @@ body {
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 <link rel="manifest" href="index.manifest.json">
-
+<style>#uap-carga{position:fixed;left:0;right:0;bottom:10%;text-align:center;color:#eadcc0;font:600 16px system-ui,sans-serif;z-index:20;text-shadow:0 1px 3px #000;pointer-events:none}</style>
+<script>
+/* P14: debajo de la barra, cuanto falta y que la proxima vez abre del almacenamiento del navegador (PWA) */
+window.addEventListener('DOMContentLoaded', function () {
+  var p = document.getElementById('status-progress'); var st = document.getElementById('status');
+  if (!p || !st) return;
+  var t = document.createElement('div'); t.id = 'uap-carga'; document.body.appendChild(t);
+  var t0 = Date.now();
+  var iv = setInterval(function () {
+    if (!document.body.contains(st)) { t.remove(); clearInterval(iv); return; }
+    var secs = (Date.now() - t0) / 1000;
+    var c = +p.value || 0, m = +p.max || 0;
+    if (p.style.display === 'none' || m <= 0) { t.textContent = secs > 2 ? 'Preparando el mundo…' : ''; return; }
+    var txt = 'Cargando ' + (c / 1048576).toFixed(1) + ' de ' + (m / 1048576).toFixed(1) + ' MB';
+    if (c >= m) txt = 'Preparando el mundo…';
+    else if (secs > 6) txt += ' · la próxima vez abrirá más rápido';
+    t.textContent = txt;
+  }, 250);
+});
+</script>
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -112,7 +131,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":16169712,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":16302560,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
