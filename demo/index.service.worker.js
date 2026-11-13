@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1794542321|16493268';
+const CACHE_VERSION = '1794544931|8148594';
 /** @type {string} */
 const CACHE_PREFIX = 'Uapeani-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
